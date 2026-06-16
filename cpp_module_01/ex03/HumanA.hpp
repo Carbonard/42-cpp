@@ -1,3 +1,6 @@
+#ifndef HUMANA_CPP
+#define HUMANA_CPP
+
 #include "Weapon.hpp"
 #include <string>
 
@@ -11,3 +14,5 @@ class HumanA
 		void setWeapon( Weapon newWeapon );
 		void attack( void );
 };
+
+#endif

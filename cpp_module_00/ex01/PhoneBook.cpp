@@ -12,7 +12,7 @@ bool PhoneBook::is_empty(void) const
 	return (_saved == 0);
 }
 
-static std::string truncate(const std::string &str)
+static const std::string truncate(const std::string &str)
 {
 	if (str.length() > 10)
 	{
@@ -24,19 +24,20 @@ static std::string truncate(const std::string &str)
 	return (str);
 }
 
-static void print_cell(const std::string &str)
+static void print_cell(const std::string &str, int i)
 {
 	std::cout
 		<< std::setw(10)
 		<< std::right
-		<< truncate(str)
-		<< '|';
+		<< truncate(str);
+	if (i != 3)
+		std::cout << '|';
 }
 
 static void print_first_row(const std::string strings[4])
 {
 	for (int i = 0; i < 4; i++)
-		print_cell(strings[i]);
+		print_cell(strings[i], i);
 	std::cout << '\n';
 }
 
@@ -48,13 +49,13 @@ static void print_row(const int &index, const std::string strings[3])
 		<< index
 		<< '|';
 	for (int i = 0; i < 3; i++)
-		print_cell(strings[i]);
+		print_cell(strings[i], i + 1);
 	std::cout << '\n';
 }
 
 void PhoneBook::display_all(void) const
 {
-	std::string first_row[4] = {"index","First Name","Last Name","Nickname"};
+	std::string first_row[4] = {"Index","First Name","Last Name","Nickname"};
 	print_first_row(first_row);
 	for (int i = 0; i < _saved; i++)
 	{
@@ -66,21 +67,29 @@ void PhoneBook::display_all(void) const
 void PhoneBook::display_one(int n) const
 {
 	if (n >= _saved || n < 0)
-	{
-		std::cerr << "Invalid index\n";
-		return;
-	}
+		throw std::runtime_error("Invalid index");
 	_contacts[n].display();
 }
 
-void PhoneBook::add(const Contact &c)
+void PhoneBook::add_new_contact(void)
 {
-	if (_saved >= MAX_CONTACTS)
+	try
 	{
-		for (int i = 0; i < MAX_CONTACTS - 1; i++)
-			_contacts[i] = _contacts[i+1];
-		_saved--;
+		Contact newContact;
+		newContact.ask_for_input();
+
+		if (_saved >= MAX_CONTACTS)
+		{
+			for (int i = 0; i < MAX_CONTACTS - 1; i++)
+				_contacts[i] = _contacts[i+1];
+			_saved = MAX_CONTACTS - 1;
+		}
+
+		_contacts[_saved] = newContact;
+		_saved++;
 	}
-	_contacts[_saved] = c;
-	_saved++;
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 }

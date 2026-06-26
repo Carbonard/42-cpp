@@ -15,7 +15,7 @@ class PhoneBook
 		bool	is_empty(void) const;
 		void	display_all(void) const;
 		void	display_one(int n) const;
-		void	add(const Contact &contact);
+		void	add_new_contact(void);
 };
 
 #endif

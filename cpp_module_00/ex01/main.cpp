@@ -4,19 +4,36 @@
 #include <string>
 #include <cstdlib>
 
+bool isNumeric(std::string str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (!std::isdigit(str[i]))
+			return false;
+	}
+	return true;
+}
+
 int main()
 {
 	PhoneBook pb;
-	std::string input = "\n";
+	std::string input;
 	do
 	{
+		std::cin.clear();
 		std::cout << "\nEnter a command (ADD / SEARCH / EXIT)\n> ";
 		std::getline(std::cin, input);
+		std::cout << std::endl;
 		if (input == "ADD")
 		{
-			Contact contact;
-			contact.ask_for_input();
-			pb.add(contact);
+			try
+			{
+				pb.add_new_contact();
+			}
+			catch (const std::runtime_error &e)
+			{
+				std::cout << e.what();
+			}
 		}
 		if (input == "SEARCH")
 		{
@@ -30,24 +47,20 @@ int main()
 			std::cout << "Index: ";
 			std::string index;
 			std::getline(std::cin, index);
-			int i;
 			try
 			{
-				for (size_t i=0; i < index.length(); i++)
-				{
-					if (!std::isdigit(index[i]))
-						throw(1);
-				}
-				i = std::atoi(index.data());
+				if (!isNumeric(index))
+					throw(std::runtime_error("Non-numeric index"));
+				if (index.empty())
+					throw(std::runtime_error("Empty index"));
+				pb.display_one(std::atoi(index.data()));
 			}
-			catch (...)
+			catch (const std::runtime_error &e)
 			{
-				i = -1;
+				std::cout << std::endl << e.what() << std::endl;
 			}
-			std::cout << '\n';
-			pb.display_one(i);
 
 		}
-	} while(input != "EXIT");
-	return (0);
+	} while(input != "EXIT" && !std::cin.eof());
+	return 0;
 }

@@ -4,33 +4,33 @@
 void Harl::debug( void )
 {
 	std::cout
-		<< "[ DEBUG ]\n"
-		<< "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!"
-		<< "\n\n";
+		<< "[ DEBUG ]" << std::endl
+		<< "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger.\nI really do!"
+		<< std::endl << std::endl;
 }
 
 void Harl::info( void )
 {
 	std::cout
-		<< "[ INFO ]\n"
-		<< "I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!"
-		<< "\n\n";
+		<< "[ INFO ]" << std::endl
+		<< "I cannot believe adding extra bacon costs more money.\nYou didn’t put enough bacon in my burger!\nIf you did, I wouldn’t be asking for more!"
+		<< std::endl << std::endl;
 }
 
 void Harl::warning( void )
 {
 	std::cout
-		<< "[ WARNING ]\n"
-		<< "I think I deserve to have some extra bacon for free. I’ve been coming for years, whereas you started working here just last month."
-		<< "\n\n";
+		<< "[ WARNING ]" << std::endl
+		<< "I think I deserve to have some extra bacon for free.\nI’ve been coming for years, whereas you started working here just last month."
+		<< std::endl << std::endl;
 }
 
 void Harl::error( void )
 {
 	std::cout
-		<< "[ ERROR ]\n"
+		<< "[ ERROR ]" << std::endl
 		<< "This is unacceptable! I want to speak to the manager now."
-		<< "\n\n";
+		<< std::endl << std::endl;
 }
 
 typedef void (Harl::*complainAction)(void);
@@ -58,5 +58,5 @@ void Harl::complain( std::string level )
 			return;
 		}
 	}
-	std::cerr << "Wrong level\n";
+	std::cout << "Wrong level" << std::endl << std::endl;
 }

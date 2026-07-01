@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re
 
-NAME = zombieParty
+NAME = Moar_brainz
 
 SRC = main.cpp Zombie.cpp zombieHorde.cpp
 

@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re
 
-NAME = zombieParty
+NAME = BraiiiiiiinnnzzzZ
 
 SRC = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 

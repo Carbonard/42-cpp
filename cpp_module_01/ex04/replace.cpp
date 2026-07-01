@@ -6,10 +6,10 @@ void check_args(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cerr
-			<< "Error: 3 arguments required:\n"
-			<< "\t<File name>\n"
-			<< "\t<Text to replace>\n"
+		std::cout
+			<< "Error: 3 arguments required:" << std::endl
+			<< "\t<File name>" << std::endl
+			<< "\t<Text to replace>" << std::endl
 			<< "\t<Replacement text>";
 		throw std::runtime_error("");
 	}
@@ -75,7 +75,7 @@ int main(int argc, char **argv)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << std::endl;
 		return (1);
 	}
 

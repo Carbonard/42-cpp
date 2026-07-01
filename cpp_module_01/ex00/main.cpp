@@ -2,8 +2,9 @@
 
 int main(void)
 {
-	Zombie *paco = newZombie("Paco");
-	randomChump("Eladio");
-	paco->announce();
-	delete paco;
+	Zombie *foo = newZombie("Foo");
+	foo->announce();
+	randomChump("Bar");
+	foo->announce();
+	delete foo;
 }

@@ -3,7 +3,7 @@
 int main(void)
 {
 	int N = 5;
-	Zombie *horde = zombieHorde(N, "Alfonso");
+	Zombie *horde = zombieHorde(N, "Foo");
 	for (int i = 0; i < N; i++)
 	{
 		horde[i].announce();

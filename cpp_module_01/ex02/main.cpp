@@ -9,17 +9,18 @@ int main( void )
 
 	std::cout
 		<< &str
-		<< '\n'
+		<< std::endl
 		<< &stringPTR
-		<< '\n'
+		<< std::endl
 		<< &stringREF
-		<< '\n';
+		<< std::endl
+		<< std::endl;
 
 	std::cout
 		<< str
-		<< '\n'
-		<< stringPTR
-		<< '\n'
+		<< std::endl
+		<< *stringPTR
+		<< std::endl
 		<< stringREF
-		<< '\n';
+		<< std::endl;
 }

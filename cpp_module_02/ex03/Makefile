@@ -4,7 +4,7 @@ NAME = insideTriangle
 
 SRC = main.cpp Fixed.cpp Point.cpp bsp.cpp
 
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
 
 OBJ_DIR = obj
 

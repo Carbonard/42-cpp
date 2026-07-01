@@ -10,7 +10,16 @@ Fixed slope(Point const &p, Point const &q)
 
 bool sameLine(Point const &a, Point const &b, Point const &c)
 {
-	if (slope(a, b) == slope(a, c))
+	if (a.getX() == b.getX())
+	{
+		if (a.getX() == c.getX())
+			return true;
+		else
+			return false;
+	}
+	else if (a.getX() == c.getX())
+		return false;
+	else if (slope(a, b) == slope(a, c))
 		return true;
 	else
 		return false;
@@ -31,9 +40,7 @@ int spacePartition(
 	{
 		Fixed m = slope(partitionPoint1, partitionPoint2);
 		v = p.getY() - m * p.getX() - partitionPoint1.getY() + m * partitionPoint1.getX();
-		// v = slope(partitionPoint1, partitionPoint2) - slope(partitionPoint1, p);
 	}
-	// std::cout << v << '\n';
 	if (v > 0)
 		return 1;
 	if (v < 0)

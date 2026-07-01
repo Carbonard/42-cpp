@@ -19,7 +19,7 @@ int main( void )
 	Point a(Fixed(-1), Fixed(0));
 	Point c(Fixed(1), Fixed(1));
 	Point b(Fixed(2), Fixed(-1));
-	Point p(Fixed(0), Fixed(0));
+	Point p(Fixed(2), Fixed(-1));
 	if (bsp(a, b, c, p))
 		std::cout << "It's inside! :D" << std::endl;
 	else
@@ -27,9 +27,9 @@ int main( void )
 }
 {
 	Point b(Fixed(-1), Fixed(0));
-	Point a(Fixed(1), Fixed(1));
-	Point c(Fixed(2), Fixed(-1));
-	Point p(Fixed(0), Fixed(0));
+	Point a(Fixed(1), Fixed(0));
+	Point c(Fixed(0), Fixed(1));
+	Point p(Fixed(0), Fixed(0.5f));
 	if (bsp(a, b, c, p))
 		std::cout << "It's inside! :D" << std::endl;
 	else
@@ -37,8 +37,8 @@ int main( void )
 }
 {
 	Point b(Fixed(-1), Fixed(0));
-	Point c(Fixed(1), Fixed(1));
-	Point a(Fixed(2), Fixed(-1));
+	Point a(Fixed(1), Fixed(0));
+	Point c(Fixed(0), Fixed(1));
 	Point p(Fixed(0), Fixed(0));
 	if (bsp(a, b, c, p))
 		std::cout << "It's inside! :D" << std::endl;
@@ -46,9 +46,9 @@ int main( void )
 		std::cout << "It's outside! D:" << std::endl;
 }
 {
-	Point c(Fixed(-1), Fixed(0));
-	Point a(Fixed(1), Fixed(1));
-	Point b(Fixed(2), Fixed(-1));
+	Point c(Fixed(0), Fixed(1));
+	Point b(Fixed(1), Fixed(2));
+	Point a(Fixed(2), Fixed(3));
 	Point p(Fixed(0), Fixed(0));
 	if (bsp(a, b, c, p))
 		std::cout << "It's inside! :D" << std::endl;
@@ -56,9 +56,9 @@ int main( void )
 		std::cout << "It's outside! D:" << std::endl;
 }
 {
-	Point c(Fixed(-1), Fixed(0));
-	Point b(Fixed(1), Fixed(1));
-	Point a(Fixed(2), Fixed(-1));
+	Point c(Fixed(1), Fixed(2));
+	Point b(Fixed(1), Fixed(2));
+	Point a(Fixed(1), Fixed(2));
 	Point p(Fixed(0), Fixed(0));
 	if (bsp(a, b, c, p))
 		std::cout << "It's inside! :D" << std::endl;

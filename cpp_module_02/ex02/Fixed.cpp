@@ -12,6 +12,9 @@ void print_debug(std::string message)
 	#endif
 }
 
+
+// CONSTRUCTORS / DESTRUCTOR
+
 Fixed::Fixed( void )
 {
 	print_debug("Default constructor called");
@@ -30,12 +33,29 @@ Fixed::Fixed( const float f )
 	_value = (int)( f * (float)(1 << _fbits) + 0.5f );
 }
 
+Fixed::Fixed( const Fixed &other )
+{
+	print_debug("Copy constructor called");
+	*this = other;
+}
+
+Fixed::~Fixed( void )
+{
+	print_debug("Destructor called");
+}
+
+
+// OPERATORS
+
 Fixed &Fixed::operator =( const Fixed &other )
 {
 	print_debug("Copy assignment operator called");
 	_value = other.getRawBits();
 	return (*this);
 }
+
+
+// COMPARING OPERATORS
 
 bool Fixed::operator >( const Fixed &other ) const
 {
@@ -67,6 +87,9 @@ bool Fixed::operator !=( const Fixed &other ) const
 	return (this->_value != other._value);
 }
 
+
+// ARITHMETIC OPERATORS
+
 Fixed Fixed::operator +( const Fixed &other ) const
 {
 	Fixed result;
@@ -95,6 +118,9 @@ Fixed Fixed::operator /( const Fixed &other ) const
 	result.setRawBits(( ((long)this->_value) << _fbits ) / other._value);
 	return(result);
 }
+
+
+// OTHER OPERATORS
 
 Fixed &Fixed::operator++( void )
 {
@@ -128,15 +154,12 @@ std::ostream &operator<<(std::ostream &out, const Fixed &f)
 	return (out);
 }
 
-Fixed::Fixed( const Fixed &other )
-{
-	print_debug("Copy constructor called");
-	*this = other;
-}
 
-Fixed::~Fixed( void )
+// SET / GET
+
+void Fixed::setRawBits( int const raw )
 {
-	print_debug("Destructor called");
+	_value = raw;
 }
 
 int Fixed::getRawBits( void ) const
@@ -144,10 +167,8 @@ int Fixed::getRawBits( void ) const
 	return (_value);
 }
 
-void Fixed::setRawBits( int const raw )
-{
-	_value = raw;
-}
+
+// CONVERSIONS
 
 float Fixed::toFloat( void ) const
 {
@@ -158,6 +179,9 @@ int Fixed::toInt( void ) const
 {
 	return (_value >> _fbits);
 }
+
+
+// MAX / MIN
 
 Fixed &Fixed::max(Fixed &a, Fixed &b)
 {

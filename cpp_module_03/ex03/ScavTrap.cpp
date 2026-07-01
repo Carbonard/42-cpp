@@ -58,7 +58,7 @@ void ScavTrap::attack(const std::string& target)
 	{
 		std::cout
 			<< "ScavTrap " << _name
-			<< " is dead :("
+			<< " is dead, cannot attack"
 			<< std::endl;
 			return;
 	}
@@ -66,7 +66,7 @@ void ScavTrap::attack(const std::string& target)
 	{
 		std::cout
 			<< "ScavTrap " << _name
-			<< " has no more energy points :("
+			<< " has no more energy points, cannot attack"
 			<< std::endl;
 			return;
 	}
@@ -84,7 +84,7 @@ void ScavTrap::guardGate( void )
 	{
 		std::cout
 			<< "ScavTrap " << _name
-			<< " is dead :("
+			<< " is dead, cannot guard the gate"
 			<< std::endl;
 			return;
 	}
@@ -92,7 +92,7 @@ void ScavTrap::guardGate( void )
 	{
 		std::cout
 			<< "ScavTrap " << _name
-			<< " has no more energy points :("
+			<< " has no more energy points, cannot guard the gate"
 			<< std::endl;
 			return;
 	}

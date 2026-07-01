@@ -58,7 +58,7 @@ void ClapTrap::attack(const std::string& target)
 	{
 		std::cout
 			<< "ClapTrap " << _name
-			<< " is dead :("
+			<< " is dead, cannot attack"
 			<< std::endl;
 			return;
 	}
@@ -66,7 +66,7 @@ void ClapTrap::attack(const std::string& target)
 	{
 		std::cout
 			<< "ClapTrap " << _name
-			<< " has no more energy points :("
+			<< " has no more energy points, cannot attack"
 			<< std::endl;
 			return;
 	}
@@ -84,7 +84,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 	{
 		std::cout
 			<< "ClapTrap " << _name
-			<< " is already dead :("
+			<< " is already dead, cannot lose more damage"
 			<< std::endl;
 			return;
 	}
@@ -104,7 +104,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 	{
 		std::cout
 			<< "ClapTrap " << _name
-			<< " is dead :("
+			<< " is dead, cannot be repaired"
 			<< std::endl;
 			return;
 	}
@@ -112,7 +112,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 	{
 		std::cout
 			<< "ClapTrap " << _name
-			<< " has no more energy points :("
+			<< " has no more energy points, cannot be repaired"
 			<< std::endl;
 			return;
 	}

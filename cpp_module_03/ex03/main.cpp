@@ -86,18 +86,18 @@ int main()
 	dtrap.attack("Target 7");
 	dtrap.takeDamage(3);
 	dtrap.highFivesGuys();
+	dtrap.guardGate();
 
 	DiamondTrap dtrap2("DT_2");
-	dtrap2.attack("Target 8");
-	dtrap2.takeDamage(9);
-	dtrap2.attack("Target 8");
-	dtrap2.highFivesGuys();
-	dtrap2.attack("Target 8");
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 11; i++)
 	{
+		dtrap2.attack("Target 8");
 		dtrap2.beRepaired(42);
-		dtrap.guardGate();
-		dtrap.highFivesGuys();
-		dtrap.whoAmI();
+		dtrap2.guardGate();
+		dtrap2.highFivesGuys();
+		dtrap2.whoAmI();
 	}
+
+	ScavTrap *F = new DiamondTrap("pepe");
+	delete F;
 }

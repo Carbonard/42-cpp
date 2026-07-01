@@ -15,16 +15,14 @@ static void print_debug(std::string message, std::string name)
 
 DiamondTrap::DiamondTrap( void )
 {
-	_hitPoints = FragTrap::_hitPoints;
-	_energyPoints = ScavTrap::_energyPoints;
-	_attackDamage = FragTrap::_attackDamage;
+	_hitPoints = 100;
+	_energyPoints = 50;
+	_attackDamage = 30;
 	print_debug("DiamondTrap default constructor", _name);
 }
 
 DiamondTrap::DiamondTrap( std::string name )
-: ClapTrap(name + "_clap_name"),
-  FragTrap(name + "_frag_name"),
-  ScavTrap(name + "_scav_name")
+: ClapTrap(name + "_clap_name")
 {
 	_name = name;
 	_hitPoints = 100;
@@ -64,9 +62,25 @@ void DiamondTrap::attack(const std::string& target)
 
 void DiamondTrap::whoAmI( void )
 {
+	if (_hitPoints == 0)
+	{
+		std::cout
+			<< "DiamondTrap " << _name
+			<< " is dead, cannot know who he is"
+			<< std::endl;
+			return;
+	}
+	if (_energyPoints == 0)
+	{
+		std::cout
+			<< "DiamondTrap " << _name
+			<< " has no more energy points, cannot know who he is"
+			<< std::endl;
+			return;
+	}
 	std::cout
 		<< "DiamondTrap " << _name
-		<< ": I am " << ClapTrap::_name
+		<< ": \"I am " << ClapTrap::_name << "\""
 		<< std::endl;
-		return;
+	_energyPoints--;
 }

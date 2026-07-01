@@ -58,7 +58,7 @@ void FragTrap::attack(const std::string& target)
 	{
 		std::cout
 			<< "FragTrap " << _name
-			<< " is dead :("
+			<< " is dead, cannot attack"
 			<< std::endl;
 			return;
 	}
@@ -66,7 +66,7 @@ void FragTrap::attack(const std::string& target)
 	{
 		std::cout
 			<< "FragTrap " << _name
-			<< " has no more energy points :("
+			<< " has no more energy points, cannot attack"
 			<< std::endl;
 			return;
 	}
@@ -84,7 +84,7 @@ void FragTrap::highFivesGuys( void )
 	{
 		std::cout
 			<< "FragTrap " << _name
-			<< " is dead :("
+			<< " is dead, cannot high fives"
 			<< std::endl;
 			return;
 	}
@@ -92,7 +92,7 @@ void FragTrap::highFivesGuys( void )
 	{
 		std::cout
 			<< "FragTrap " << _name
-			<< " has no more energy points :("
+			<< " has no more energy points, cannot high fives"
 			<< std::endl;
 			return;
 	}

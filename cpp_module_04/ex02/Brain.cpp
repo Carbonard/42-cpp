@@ -38,7 +38,7 @@ void Brain::haveAnIdea(std::string idea)
 {
 	if (nbIdeas == 100)
 	{
-		std::cout << "Full of ideas\n";
+		std::cout << "Full of ideas" << std::endl;
 		return;
 	}
 	ideas[nbIdeas] = idea;

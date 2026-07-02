@@ -40,6 +40,8 @@ int main()
 	delete i;
 	delete j;
 }
+
+
 {
 	std::cout << std::endl << "[ MY TEST 01 ]" << std::endl;
 
@@ -62,7 +64,8 @@ int main()
 	a.haveAnIdea("Dog idea number 1");
 	a.haveAnIdea("Dog idea number 2");
 	
-	a = a;
+	Dog &c = a;
+	a = c;
 	b = a;
 	a.haveAnIdea("Dog idea number 3");
 	a.haveAnIdea("Dog idea number 4");

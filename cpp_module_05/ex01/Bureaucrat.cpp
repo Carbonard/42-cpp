@@ -70,14 +70,14 @@ int Bureaucrat::getGrade() const
 void Bureaucrat::incrementGrade()
 {
 	if (_grade == B_MAX_GRADE)
-		throw GradeTooHighException("Cannot increment bureaucrat grade");
+		throw GradeTooHighException();
 	_grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
 	if (_grade == B_MIN_GRADE)
-		throw GradeTooLowException("Cannot decrement bureaucrat grade");
+		throw GradeTooLowException();
 	this->_grade++;
 }
 

@@ -4,7 +4,7 @@ NAME = bureaucrats
 
 SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 OBJ_DIR = obj
 

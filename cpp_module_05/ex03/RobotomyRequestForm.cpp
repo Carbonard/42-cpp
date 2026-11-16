@@ -1,6 +1,7 @@
 #include "RobotomyRequestForm.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <unistd.h>
 
 static void print_debug(std::string message)
 {
@@ -43,7 +44,13 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void RobotomyRequestForm::executeAction()
 {
-	std::cout << "\aMaking some drilling noises...\a\a\a\a\a\a\a" << std::endl;
+	std::cout << "Making some drilling noises";
+	for (int i = 0; i < 5; i++)
+	{
+		std::cout << "\a." << std::flush;
+		usleep(200000);
+	}
+	std::cout << std::endl;
 	if (std::rand() % 2)
 		std::cout << _target << " has been robotomized successfully" << std::endl;
 	else

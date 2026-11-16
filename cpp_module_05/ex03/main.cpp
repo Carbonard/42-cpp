@@ -21,9 +21,3 @@ int main()
 	for (int i = 0; i < nbForms; i++)
 		delete forms[i];
 }
-
-/*
-	DUDAS:
-	- igualar forms (originales y ahora para llamar a aquella)
-	- Default constructors?
-*/

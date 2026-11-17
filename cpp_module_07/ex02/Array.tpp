@@ -49,8 +49,8 @@ Array<T>& Array<T>::operator=(const Array<T> &other)
 template<typename T>
 T& Array<T>::operator[](const int idx) const
 {
-	if (static_cast<size_t>(idx) >= _size)
-		throw std::runtime_error(std::string("invalid index"));
+	if (static_cast<size_t>(idx) >= _size || idx < 0)
+		throw std::runtime_error("invalid index");
 	return _array[idx];
 }
 

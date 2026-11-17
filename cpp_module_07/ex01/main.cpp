@@ -1,7 +1,8 @@
 #include "iter.hpp"
+#include "testFunctions.hpp"
 #include <string>
+#include <string.h>
 #include <iostream>
-#include <cstdlib>
 
 void toUpper(char &c)
 {
@@ -16,49 +17,23 @@ void doubleNbr(int &n)
 	n *= 2;
 }
 
-template <typename T>
-void addOne(T &var)
-{
-	var +=1;
-}
-
-static int meanSum, meanSize;
-
-template <typename T>
-void addMean(const T &n)
-{
-	meanSum += n;
-	meanSize++;
-}
-
-float getMean(void)
-{
-	return (float)meanSum / meanSize;
-}
-
-void resetMean(void)
-{
-	meanSum = 0;
-	meanSize = 0;
-}
-
 int main()
 {
 
 //	Test array of char
 {
-	char str[] = "hello_world";
-	size_t N = sizeof(str) / sizeof(char);
+	char str[] = "abcde";
+	size_t N = strlen(str);
 
 	std::cout << "Original array: " << str << std::endl;
 	
 	iter(str, N, toUpper);
 	
-	std::cout << "Modified array: " << str << std::endl;
+	std::cout << "Modified (toUpper): " << str << std::endl;
 	
 	iter(str, N, addOne<char>);
 	
-	std::cout << "Modified array: " << str << std::endl;
+	std::cout << "Modified (addOne): " << str << std::endl;
 
 	resetMean();
 	iter(str, N, addMean<char>);
@@ -78,7 +53,7 @@ int main()
 
 	iter(arr, N, doubleNbr);
 
-	std::cout << "Modified array: " << "{";
+	std::cout << "Modified (doubleNbr): " << "{";
 	for (size_t i = 0; i < N; i++)
 	{
 		std::cout << " " << arr[i] << " ";
@@ -87,7 +62,7 @@ int main()
 
 	iter(arr, N, addOne<int>);
 
-	std::cout << "Modified array: " << "{";
+	std::cout << "Modified (addOne): " << "{";
 	for (size_t i = 0; i < N; i++)
 	{
 		std::cout << " " << arr[i] << " ";

@@ -6,8 +6,8 @@
 #define MAX_VAL 750
 int main()
 {
-{
 	std::cout << "---------- SUBJECT TESTS ----------" << std::endl;
+{
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
@@ -54,8 +54,8 @@ int main()
     }
     delete [] mirror;//
 }
-{
 	std::cout << "---------- MY TESTS ----------" << std::endl;
+{
 	// int *n = new int();
 	// std::cout << *n << std::endl;
 
@@ -81,6 +81,7 @@ int main()
 	arr0 = arr;
 	arr[1] = 24;
 	arr2[1] = -42;
+
 	std::cout << std::endl;
 	for (size_t i = 0; i < arr.size() + 1; i++)
 	{
@@ -94,6 +95,7 @@ int main()
 			std::cerr << e.what() << '\n';
 		}
 	}
+
 	std::cout << std::endl;
 	for (size_t i = 0; i < arr2.size() + 1; i++)
 	{
@@ -107,6 +109,7 @@ int main()
 			std::cerr << e.what() << '\n';
 		}
 	}
+
 	std::cout << std::endl;
 	for (size_t i = 0; i < arr0.size() + 1; i++)
 	{
@@ -120,5 +123,4 @@ int main()
 			std::cerr << e.what() << '\n';
 		}
 	}}
-
 }

@@ -3,8 +3,8 @@
 
 #include <cstddef>
 
-template <typename T, typename S>
-void iter(T *array, const size_t N, S function)
+template <typename T, typename F>
+void iter(T *array, const size_t N, F function)
 {
 	for (size_t i = 0; i < N; i++)
 		function(array[i]);

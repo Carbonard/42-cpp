@@ -2,7 +2,7 @@
 
 NAME = test
 
-SRC = main.cpp
+SRC = main.cpp testFunctions.cpp
 
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 

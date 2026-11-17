@@ -29,20 +29,7 @@ void	Span::addNumber(const int n)
 {
 	if (_v.size() >= _maxSize)
 		throw std::runtime_error("Span is full");
-	// if (_v.size() == 0)
-		_v.push_back(n);
-	// else
-	// {
-	// 	for (t_container::iterator i = _v.begin(); i != _v.end(); i++)
-	// 	{
-	// 		if (*i > n)
-	// 		{
-	// 			_v.insert(i, n);
-	// 			return;
-	// 		}
-	// 	}
-	// 	_v.push_back(n);
-	// }
+	_v.push_back(n);
 }
 
 static unsigned int dist(int a, int b)

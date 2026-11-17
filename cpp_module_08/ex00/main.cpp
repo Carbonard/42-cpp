@@ -18,8 +18,7 @@ int main()
 	c.push_back(42);
 	try
 	{
-		int a = 42;
-		*(easyfind(c, a)) = -42;
+		*(easyfind(c, 42)) = -42;
 		for (container::iterator i = c.begin(); i != c.end(); i++)
 		{
 			std::cout << *i << " ";
@@ -43,8 +42,7 @@ int main()
 	c.push_back(42);
 	try
 	{
-		int a = 42;
-		*(easyfind(c, a)) = -42;
+		*(easyfind(c, 42)) = -42;
 		for (container::iterator i = c.begin(); i != c.end(); i++)
 		{
 			std::cout << *i << " ";
@@ -68,8 +66,7 @@ int main()
 	c.push_back(42);
 	try
 	{
-		int a = 42;
-		*(easyfind(c, a)) = -42;
+		*(easyfind(c, 42)) = -42;
 		for (container::iterator i = c.begin(); i != c.end(); i++)
 		{
 			std::cout << *i << " ";

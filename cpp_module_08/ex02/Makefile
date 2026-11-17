@@ -2,7 +2,7 @@
 
 NAME = test
 
-SRC = main.cpp MutantStack.cpp
+SRC = main.cpp
 
 DEP = MutantStack.hpp
 

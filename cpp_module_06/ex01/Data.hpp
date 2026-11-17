@@ -9,5 +9,4 @@ typedef struct Data_s
 	std::string	text;
 }	Data;
 
-
 #endif

@@ -5,12 +5,13 @@
 
 class ScalarConverter
 {
-public:
+private:
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter &operator=(const ScalarConverter &other);
-	virtual ~ScalarConverter() = 0;
+	virtual ~ScalarConverter();
 
+public:
 	static void	convert(const std::string &literal);
 };
 

@@ -12,5 +12,8 @@ int main()
 		std::cout << "That's correct" << std::endl;
 	else
 		std::cout << "That's wrong" << std::endl;
-	std::cout << std::endl << "Data info:" << std::endl << ptr->text << std::endl << ptr->number << std::endl;
+	std::cout << std::endl
+		<< "Data info:" << std::endl
+		<< "   " << ptr->text << std::endl
+		<< "   " << ptr->number << std::endl;
 }

@@ -4,7 +4,7 @@ NAME = convert
 
 SRC = main.cpp ScalarConverter.cpp Scalar.cpp isLiteral.cpp ScalarCasts.cpp ScalarPrint.cpp
 
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 OBJ_DIR = obj
 

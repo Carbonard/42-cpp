@@ -1,6 +1,5 @@
 #include "Scalar.hpp"
 #include <limits>
-#include <cmath>
 
 static bool	charCastable(int nb)
 {

@@ -4,7 +4,7 @@ NAME = identify
 
 SRC = main.cpp Base.cpp
 
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 OBJ_DIR = obj
 

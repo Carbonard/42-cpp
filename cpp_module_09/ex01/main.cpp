@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 	{
 		int result = calculateResult(argv[1]);
 
-		std::cout << "the result is " << result << std::endl;
+		std::cout << result << std::endl;
 	}
 	catch(const std::exception& e)
 	{

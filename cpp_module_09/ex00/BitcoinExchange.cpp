@@ -24,7 +24,6 @@ void readCSV(std::string csvFileName, t_map& map)
 			std::stringstream ss(aux);
 			ss >> map[key];
 			aux = "";
-			// std::cout << key << ": " << map[key] << '\n';
 		}
 		else
 			aux += c;
@@ -74,23 +73,23 @@ static double getValue(const std::string& line, size_t& i)
 	return value;
 }
 
-static bool checkDate(const std::string& line, int year, int month, int day)
+static bool checkDate(const std::string& strDate, int year, int month, int day)
 {
 	if (year < 1000 || year > 9999)
-		throw std::runtime_error(std::string("Error: bad year => ") + line);
+		throw std::runtime_error(std::string("Error: bad year => ") + strDate);
 	if (month <= 0 || month > 12)
-		throw std::runtime_error(std::string("Error: bad month => ") + line);
+		throw std::runtime_error(std::string("Error: bad month => ") + strDate);
 	if (month <= 0 || day > 31)
-		throw std::runtime_error(std::string("Error: bad day => ") + line);
+		throw std::runtime_error(std::string("Error: bad day => ") + strDate);
 	if (day == 31
 		&& (month == 4 || month == 6 || month == 9 || month == 11))
-		throw std::runtime_error(std::string("Error: bad day => ") + line);
+		throw std::runtime_error(std::string("Error: bad day => ") + strDate);
 	if (month == 2)
 	{
 		if (day > 29)
-			throw std::runtime_error(std::string("Error: bad day => ") + line);
+			throw std::runtime_error(std::string("Error: bad day => ") + strDate);
 		if (month == 2 && day == 29 && !(year%4 == 0 && (year%100 != 0 || year%400 == 0)))
-			throw std::runtime_error(std::string("Error: bad day => ") + line);
+			throw std::runtime_error(std::string("Error: bad day => ") + strDate);
 	}
 	return true;
 }
@@ -124,7 +123,7 @@ static void parseLine(const std::string& line, std::string& date, double& value)
 	date = line.substr(0, i);
 	checkSeparator(line, i);
 	value = getValue(line, i);
-	checkDate(line, year, month, day);
+	checkDate(date, year, month, day);
 	if (checkValue(line.substr(i), value))
 		throw std::runtime_error(std::string("Error: bad input => ") + line);
 }

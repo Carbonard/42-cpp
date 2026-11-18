@@ -12,9 +12,11 @@ int calculateResult(const std::string expression)
 			continue;
 		if (std::isdigit(*it))
 			s.push(*it - '0');
+		else if (validTokens.find(*it) == std::string::npos)
+			throw std::runtime_error(std::string("Invalid token: ") + *it);
 		else
 		{
-			if (s.size() < 2 && validTokens.find(*it) != std::string::npos)
+			if (s.size() < 2)
 				throw std::runtime_error("Missing numbers or exceeding operations in expression");
 			aux = s.top();
 			s.pop();
@@ -31,10 +33,6 @@ int calculateResult(const std::string expression)
 				break;
 			case '/':
 				s.top() /= aux;
-				break;
-			
-			default:
-				throw std::runtime_error(std::string("Invalid token: ") + *it);
 				break;
 			}
 		}

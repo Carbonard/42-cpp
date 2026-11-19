@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
 template<template <typename, typename> class C>
-void PmergeMe<C>::insert (
+size_t PmergeMe<C>::insert (
 						LinkContainer_t& sorted,
 						Link* toInsert,
 						size_t top)
@@ -14,8 +14,8 @@ void PmergeMe<C>::insert (
 		if ((mid==0 || toInsert->max_number > sorted[mid-1]->max_number)
 			&& toInsert->max_number < sorted[mid]->max_number)
 		{
-			sorted.insert(sorted.begin()+mid, toInsert);
-			return;
+			sorted.insert(sorted.begin() + mid, toInsert);
+			return mid;
 		}
 		else if (toInsert->max_number > sorted[mid]->max_number)
 			bottom = mid+1;
@@ -24,20 +24,7 @@ void PmergeMe<C>::insert (
 	}
 	while (bottom < top);
 	sorted.insert(sorted.begin() + top, toInsert);
-	return;
-}
-
-template<template <typename, typename> class C>
-size_t PmergeMe<C>::search(
-							LinkContainer_t		sorted,
-							size_t				i,
-							LinkContainer_t&	sortedPairs,
-							size_t				inserted)
-{
-	typedef typename LinkContainer_t::iterator t_iterator;
-	t_iterator begin = sorted.begin() + i + 1;
-	t_iterator end = begin + inserted;
-	return std::distance(sorted.begin(), std::find(begin, end, sortedPairs[i]->max_link));
+	return top;
 }
 
 template<template <typename, typename> class C>
@@ -51,33 +38,46 @@ typename PmergeMe<C>::LinkContainer_t PmergeMe<C>::merge(
 	// Create main chain
 	sorted.push_back(sortedPairs[0]->min_link);
 	for (size_t i = 0; i < sortedPairs.size(); i++)
+	{
+		sortedPairs[i]->sortedIndex = sorted.size();
 		sorted.push_back(sortedPairs[i]->max_link);
+	}
 	
 	// Insert lesser number of each pair.
 	size_t	k=2,
 			tkPrev=1,
-			tk = std::pow(2, k) - tkPrev;
-	size_t inserted = 1;
+			tk = std::pow(2, k) - tkPrev,
+			idx;
 	while (tk <= sortedPairs.size())
 	{
 		for (size_t i = tk; i > tkPrev; i--)
 		{
-			insert( sorted,
-					sortedPairs[i-1]->min_link,
-					sorted.size()
-					// search(sorted, i-1, sortedPairs, inserted) // upper bound for binary search
-				);
-			inserted++;
+			idx = insert(sorted,
+								sortedPairs[i-1]->min_link,
+								sortedPairs[i-1]->sortedIndex + tkPrev-1
+							);
+			// for (size_t p = sortedPairs.size(); p > tk ; p--)
+			// 	sortedPairs[p-1]->sortedIndex++;
+			for (size_t p = i-1; p > tkPrev && sortedPairs[p-1]->sortedIndex + tkPrev-1 >= idx; p--)
+				sortedPairs[p-1]->sortedIndex++;
 		}
 		tkPrev = tk;
 		k++;
 		tk = std::pow(2, k) - tkPrev;
 	}
 	if (leftover)
-		insert(sorted, leftover, sorted.size());
+	{
+		idx = insert(sorted, leftover, sorted.size());
+		for (size_t p = sortedPairs.size(); p > tkPrev && sortedPairs[p-1]->sortedIndex + tkPrev-1 >= idx; p--)
+			sortedPairs[p-1]->sortedIndex++;
+	}
 	if (sortedPairs.size() > 0)
 		for (size_t i = std::min(tk, sortedPairs.size()); i > tkPrev; i--)
-			insert(sorted, sortedPairs[i-1]->min_link, std::distance(sorted.begin(), std::find(sorted.begin() + i, sorted.end(), sortedPairs[i-1]->max_link)));
+		{
+			idx = insert(sorted, sortedPairs[i-1]->min_link, sorted.size());
+			for (size_t p = sortedPairs.size(); p > tkPrev && sortedPairs[p-1]->sortedIndex + tkPrev-1 >= idx; p--)
+				sortedPairs[p-1]->sortedIndex++;
+		}
 	
 	// Basic shit:
 
@@ -147,5 +147,4 @@ void PmergeMe<C>::computeContainer(int argc, char** argv)
 	printTime(c.size(), getContainerType(c), getTime() - initialTime);
 
 	checkSorted(c);
-	std::cout << std::endl;
 }

@@ -31,6 +31,7 @@ typename PmergeMe<C>::Link& PmergeMe<C>::Link::operator=(const Link &other)
 	this->max_number = other.max_number;
 	this->max_link = other.max_link;
 	this->min_link = other.min_link;
+	this->sortedIndex = other.sortedIndex;
 	return *this;
 }
 
@@ -40,6 +41,7 @@ PmergeMe<C>::Link::Link(int a, int b)
 	max_number = std::max(a, b);
 	max_link = NULL;
 	min_link = NULL;
+	sortedIndex = 0;
 }
 
 template<template <typename, typename> class C>
@@ -57,6 +59,7 @@ PmergeMe<C>::Link::Link(Link* a, Link* b)
 		max_link = b;
 		min_link = a;
 	}
+	sortedIndex = 0;
 }
 
 template<template <typename, typename> class C>

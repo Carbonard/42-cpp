@@ -33,12 +33,12 @@ private:
 			Link* max_link;
 			Link* min_link;
 			int max_number;
+			size_t sortedIndex;
 	};
 
 	typedef C<Link*, std::allocator<Link*> > LinkContainer_t;
 
-	static void insert (LinkContainer_t& sorted, Link* toInsert, size_t top);
-	static size_t search(LinkContainer_t sorted, size_t i, LinkContainer_t& sortedPairs, size_t ins);
+	static size_t insert (LinkContainer_t& sorted, Link* toInsert, size_t top);
 	static LinkContainer_t merge(LinkContainer_t& sortedPairs, Link* leftover);
 	static void sortLinks(LinkContainer_t& container);
 	static void sortContainer(C<int, std::allocator<int> >& container);

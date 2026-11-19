@@ -21,3 +21,22 @@ void printContainer(const C& c)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 }
+
+template<typename C>
+void checkSorted(C& c)
+{
+	typename C::const_iterator it = c.begin();
+	typename C::const_iterator it_next = c.begin();
+	if (it_next != c.end())
+		++it_next;
+	while (it_next != c.end())
+	{
+		if (*it > *it_next)
+		{
+			std::cout << "\e[31mWROOONG!! "<< *it_next <<"\e[0m\n";
+			return;
+		}
+		++it;
+		it_next++;
+	}
+}

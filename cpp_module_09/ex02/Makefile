@@ -2,11 +2,11 @@
 
 NAME = PmergeMe
 
-SRC = main.cpp PmergeMe.cpp utils.cpp
+SRC = main.cpp PmergeMe.cpp
 
-DEP = PmergeMe.hpp PmergeMe.tpp Makefile
+DEP = PmergeMe.hpp PmergeMe.tpp PmergeMe_utils.tpp PmergeMe_algorithm.tpp Makefile
 
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 OBJ_DIR = obj
 

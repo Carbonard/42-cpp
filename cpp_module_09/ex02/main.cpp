@@ -10,9 +10,8 @@ int main(int argc, char** argv)
 
 	try
 	{
-		PmergeMe::computeContainer<t_vector>(argc, argv);
-		PmergeMe::computeContainer<t_deque>(argc, argv);
-		// computeContainer<t_list>(argc, argv);
+		PmergeMe<std::vector>::computeContainer(argc, argv);
+		PmergeMe<std::deque>::computeContainer(argc, argv);
 	}
 	catch(const std::exception& e)
 	{
@@ -22,5 +21,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
-// 40000 -> > 8.5 sec

@@ -1,51 +1,58 @@
 #include "PmergeMe.hpp"
+#include <sys/time.h>
+#include <limits>
 
-
-PmergeMe::PmergeMe(){}
-PmergeMe::PmergeMe(const PmergeMe &other){(void) other;}
-PmergeMe& PmergeMe::operator=(const PmergeMe &other){(void) other; return *this;}
-PmergeMe::~PmergeMe(){}
-
-
-PmergeMe::Link::Link(){}
-
-PmergeMe::Link::Link(const Link &other)
+size_t getTime()
 {
-	this->max_number = other.max_number;
-	this->max_link = other.max_link;
-	this->min_link = other.min_link;
+	timeval tv;
+	gettimeofday(&tv, NULL);
+	return static_cast<size_t>(tv.tv_sec) * 1000 * 1000
+			+ static_cast<size_t>(tv.tv_usec);
 }
 
-PmergeMe::Link& PmergeMe::Link::operator=(const Link &other)
+bool validArg(const std::string arg)
 {
-	this->max_number = other.max_number;
-	this->max_link = other.max_link;
-	this->min_link = other.min_link;
-	return *this;
-}
-
-PmergeMe::Link::Link(int a, int b)
-{
-	max_number = std::max(a, b);
-	max_link = NULL;
-	min_link = NULL;
-}
-
-PmergeMe::Link::Link(Link* a, Link* b)
-{
-	if (a->max_number > b->max_number)
+	if (arg.length() > 11)
+		return false;
+	size_t i = 0;
+	if (arg[i] == '+' || arg[i] == '-')
+		i++;
+	if (i == arg.length())
+		return false;
+	while (i < arg.length())
 	{
-		max_number = a->max_number;
-		max_link = a;
-		min_link = b;
+		if (!std::isdigit(arg[i]))
+			return false;
+		i++;
 	}
+	long n = std::atol(arg.c_str());
+	if (n > std::numeric_limits<int>::max()
+	 || n < std::numeric_limits<int>::min())
+		return false;
+	return true;
+}
+
+const char* getContainerType(std::vector<int>& c)
+{
+	(void) c;
+	return "std::vector";
+}
+
+const char* getContainerType(std::deque<int>& c)
+{
+	(void) c;
+	return "std::deque";
+}
+
+void printTime(size_t size, const char* container, size_t time)
+{
+	std::cout
+		<< "Time to process a range of " << size << " elements "
+		<< "with " << container << " : ";
+	if (time < 1000)
+		std::cout << time << " usec" << std::endl;
+	else if (time < 1000000)
+		std::cout << static_cast<double>(time)/1000 << " msec" << std::endl;
 	else
-	{
-		max_number = b->max_number;
-		max_link = b;
-		min_link = a;
-	}
+		std::cout << static_cast<double>(time)/1000000 << " sec" << std::endl;
 }
-
-PmergeMe::Link::~Link()
-{}

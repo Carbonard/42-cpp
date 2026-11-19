@@ -11,6 +11,8 @@ typedef std::vector<int>	t_vector;
 typedef std::deque<int>		t_deque;
 typedef std::list<int>		t_list;
 
+
+template<template <typename, typename> class C>
 class PmergeMe
 {
 private:
@@ -33,32 +35,27 @@ private:
 			int max_number;
 	};
 
-	template<template <typename, typename> class C>
-	static void insert (C<Link*, std::allocator<Link*> >& sorted, Link* toInsert, size_t top);
+	typedef C<Link*, std::allocator<Link*> > LinkContainer_t;
 
-	template<template <typename, typename> class C>
-	static size_t search(C<Link*, std::allocator<Link*> > sorted, size_t i, C<Link*, std::allocator<Link*> >& sortedPairs, size_t ins);
-
-	template<template <typename, typename> class C>
-	static C<Link*, std::allocator<Link*> > merge(C<Link*, std::allocator<Link*> >& sortedPairs, Link* leftover);
-
-	template<template <typename, typename> class C>
-	static void sortLinks(C<Link*, std::allocator<Link*> >& container);
-
-	template<template <typename, typename> class C>
+	static void insert (LinkContainer_t& sorted, Link* toInsert, size_t top);
+	static size_t search(LinkContainer_t sorted, size_t i, LinkContainer_t& sortedPairs, size_t ins);
+	static LinkContainer_t merge(LinkContainer_t& sortedPairs, Link* leftover);
+	static void sortLinks(LinkContainer_t& container);
 	static void sortContainer(C<int, std::allocator<int> >& container);
 
 public:
-	template<typename T>
 	static void computeContainer(int argc, char** argv);
 };
 
 size_t getTime();
 bool validArg(const std::string arg);
 
-std::string getContainerType(std::vector<int>& c);
-std::string getContainerType(std::deque<int>& c);
+const char* getContainerType(std::vector<int>& c);
+const char* getContainerType(std::deque<int>& c);
+void printTime(size_t size, const char* container, size_t time);
 
+#include "PmergeMe_utils.tpp"
 #include "PmergeMe.tpp"
+#include "PmergeMe_algorithm.tpp"
 
 #endif

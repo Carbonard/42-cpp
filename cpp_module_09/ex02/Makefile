@@ -2,9 +2,9 @@
 
 NAME = PmergeMe
 
-SRC = main.cpp PmergeMe.cpp utils.cpp VectorBlock.cpp
+SRC = main.cpp PmergeMe.cpp utils.cpp
 
-DEP = PmergeMe.hpp PmergeMe.tpp VectorBlock.hpp Makefile
+DEP = PmergeMe.hpp PmergeMe.tpp Makefile
 
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
 

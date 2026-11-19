@@ -10,8 +10,8 @@ int main(int argc, char** argv)
 
 	try
 	{
-		computeContainer<t_vector>(argc, argv);
-		computeContainer<t_deque>(argc, argv);
+		PmergeMe::computeContainer<t_vector>(argc, argv);
+		PmergeMe::computeContainer<t_deque>(argc, argv);
 		// computeContainer<t_list>(argc, argv);
 	}
 	catch(const std::exception& e)

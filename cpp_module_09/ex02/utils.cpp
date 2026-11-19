@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
-// #include <cstdlib>
 #include <sys/time.h>
+#include <limits>
 
 size_t getTime()
 {
@@ -25,5 +25,21 @@ bool validArg(const std::string arg)
 			return false;
 		i++;
 	}
+	long n = std::atol(arg.c_str());
+	if (n > std::numeric_limits<int>::max()
+	 || n < std::numeric_limits<int>::min())
+		return false;
 	return true;
+}
+
+std::string getContainerType(std::vector<int>& c)
+{
+	(void) c;
+	return "std::vector";
+}
+
+std::string getContainerType(std::deque<int>& c)
+{
+	(void) c;
+	return "std::deque";
 }

@@ -22,18 +22,18 @@ int calculateResult(const std::string expression)
 			s.pop();
 			switch (*it)
 			{
-			case '+':
-				s.top() += aux;
-				break;
-			case '*':
-				s.top() *= aux;
-				break;
-			case '-':
-				s.top() -= aux;
-				break;
-			case '/':
-				s.top() /= aux;
-				break;
+				case '+':
+					s.top() += aux;
+					break;
+				case '*':
+					s.top() *= aux;
+					break;
+				case '-':
+					s.top() -= aux;
+					break;
+				case '/':
+					s.top() /= aux;
+					break;
 			}
 		}
 	}

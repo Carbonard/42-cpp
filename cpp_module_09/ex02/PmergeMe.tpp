@@ -2,30 +2,9 @@
 #define PMERGEME_TPP
 
 #include "PmergeMe.hpp"
-#include <cstdlib>
+#include "PmergeMe_utils.tpp"
 #include <cmath>
 #include <algorithm>
-
-template<typename C>
-void saveArgs(int argc, char** argv, C& c)
-{
-	for (int i = 1; i < argc; i++)
-	{
-		if (!argv[i][0])
-			continue;
-		if (!validArg(argv[i]))
-			throw std::runtime_error(std::string("Error: invlalid argument: ") + argv[i]);
-		c.push_back(std::atoi(argv[i]));
-	}
-}
-
-template<typename C>
-void printContainer(const C& c)
-{
-	for (typename C::const_iterator it = c.begin(); it != c.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
 
 template<typename C>
 void checkSorted(C& c)
@@ -47,8 +26,11 @@ void checkSorted(C& c)
 }
 
 template<template <typename, typename> class C>
+void PmergeMe::insert (
+					C<Link*, std::allocator<Link*> >& sorted,
+					Link* toInsert,
+					size_t top)
 // Binary search to insert elements
-static void insert (C<Link*, std::allocator<Link*> >& sorted, Link* toInsert, size_t top)
 {
 	size_t bottom = 0;
 	do
@@ -71,16 +53,23 @@ static void insert (C<Link*, std::allocator<Link*> >& sorted, Link* toInsert, si
 }
 
 template<template <typename, typename> class C>
-static size_t search(C<Link*, std::allocator<Link*> > sorted, size_t i, C<Link*, std::allocator<Link*> >& sortedPairs, size_t ins)
+size_t PmergeMe::search(
+					C<Link*, std::allocator<Link*> >	sorted,
+					size_t								i,
+					C<Link*, std::allocator<Link*> >&	sortedPairs,
+					size_t								inserted)
 {
-	typename C<Link*, std::allocator<Link*> >::iterator begin = sorted.begin() + i + 1;
-	typename C<Link*, std::allocator<Link*> >::iterator end = begin + ins;
+	typedef typename C<Link*, std::allocator<Link*> >::iterator t_iterator;
+	t_iterator begin = sorted.begin() + i + 1;
+	t_iterator end = begin + inserted;
 	return std::distance(sorted.begin(), std::find(begin, end, sortedPairs[i]->max_link));
 }
 
 template<template <typename, typename> class C>
+C<PmergeMe::Link*, std::allocator<PmergeMe::Link*> > PmergeMe::merge(
+								C<Link*, std::allocator<Link*> >&	sortedPairs,
+								Link*								leftover)
 // Create the main chain with the greater numbers of each pair and then insert the lesser numbers
-static C<Link*, std::allocator<Link*> > merge(C<Link*, std::allocator<Link*> >& sortedPairs, Link* leftover)
 {
 	C<Link*, std::allocator<Link*> > sorted;
 
@@ -98,7 +87,10 @@ static C<Link*, std::allocator<Link*> > merge(C<Link*, std::allocator<Link*> >& 
 	{
 		for (size_t i = tk; i > tkPrev; i--)
 		{
-			insert(sorted, sortedPairs[i-1]->min_link, search(sorted, i-1, sortedPairs, inserted));//i+inserted);
+			insert( sorted,
+					sortedPairs[i-1]->min_link,
+					search(sorted, i-1, sortedPairs, inserted) // upper bound for binary search
+				);
 			inserted++;
 		}
 		tkPrev = tk;
@@ -122,8 +114,8 @@ static C<Link*, std::allocator<Link*> > merge(C<Link*, std::allocator<Link*> >& 
 }
 
 template<template <typename, typename> class C>
+void PmergeMe::sortLinks(C<Link*, std::allocator<Link*> >& container)
 // Sort the links by their greater item
-void sortLinks(C<Link*, std::allocator<Link*> >& container)
 {
 	if (container.size() == 1)
 		return;
@@ -146,7 +138,7 @@ void sortLinks(C<Link*, std::allocator<Link*> >& container)
 }
 
 template<template <typename, typename> class C>
-void sortContainer(C<int, std::allocator<int> >& container)
+void PmergeMe::sortContainer(C<int, std::allocator<int> >& container)
 {	
 	C<Link*, std::allocator<Link*> > auxContainer;
 
@@ -161,24 +153,27 @@ void sortContainer(C<int, std::allocator<int> >& container)
 }
 
 template<typename C>
-void computeContainer(int argc, char** argv)
+void PmergeMe::computeContainer(int argc, char** argv)
 {
 	C c;
 
 	size_t time = getTime();
 	saveArgs(argc, argv, c);
-	// std::cout << "Before: ";
-	// printContainer(c);
+	std::cout << "Before: ";
+	printContainer(c);
 	sortContainer(c);
-	// std::cout << "After:  ";
-	// printContainer(c);
+	std::cout << "After:  ";
+	printContainer(c);
 	time = getTime() - time;
+	std::cout
+		<< "Time to process a range of " << c.size() << " elements "
+		<< "with " << getContainerType(c) << " : ";
 	if (time < 1000)
-		std::cout << "Time: " << time << " usec" << std::endl;
+		std::cout << time << " usec" << std::endl;
 	else if (time < 1000000)
-		std::cout << "Time: " << static_cast<double>(time)/1000 << " msec" << std::endl;
+		std::cout << static_cast<double>(time)/1000 << " msec" << std::endl;
 	else
-		std::cout << "Time: " << static_cast<double>(time)/1000000 << " sec" << std::endl;
+		std::cout << static_cast<double>(time)/1000000 << " sec" << std::endl;
 	checkSorted(c);
 	std::cout << std::endl;
 }

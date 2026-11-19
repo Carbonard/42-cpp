@@ -28,9 +28,10 @@ size_t PmergeMe<C>::insert (
 }
 
 template<template <typename, typename> class C>
-typename PmergeMe<C>::LinkContainer_t PmergeMe<C>::merge(
-														LinkContainer_t&	sortedPairs,
-														Link*				leftover)
+typename PmergeMe<C>::
+LinkContainer_t PmergeMe<C>::merge(
+								LinkContainer_t&	sortedPairs,
+								Link*				leftover)
 // Create the main chain with the greater numbers of each pair and then insert the lesser numbers
 {
 	LinkContainer_t sorted;
@@ -79,7 +80,7 @@ typename PmergeMe<C>::LinkContainer_t PmergeMe<C>::merge(
 				sortedPairs[p-1]->sortedIndex++;
 		}
 	
-	// Basic shit:
+	// Basic algorithm:
 
 	// for (size_t i = 1; i < sortedPairs.size(); i++)
 	// 	insert(sorted, sortedPairs[i]->min_link, sorted.size());
